@@ -15,8 +15,11 @@ public class Player : MonoBehaviour
     [SerializeField] private AudioClip fireSound;
     [SerializeField] private GameObject shotPref;
     [SerializeField] private float fireImpulse;
-    [SerializeField] private Transform fireTransform;
+    [SerializeField] private Transform fireTransformMid;
+    [SerializeField] private Transform fireTransformUp;
+    [SerializeField] private Transform fireTransformDown;
     public float fireRate;
+    public int guns;
     private bool canShot;
     void Start()
     {
@@ -30,11 +33,26 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("Fire1") && canShot)
         {
             StartCoroutine(FireCD(fireRate));
-            GameObject bullet = Instantiate(shotPref, fireTransform.position, Quaternion.Euler(0,0,90));
-            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(Vector2.right * fireImpulse , ForceMode2D.Impulse);
+            GameObject bullet = Instantiate(shotPref, fireTransformMid.position, fireTransformMid.rotation);
+            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
             Destroy(bullet, 2);
             //audio.clip = fireSound;
             //audio.Play();
+            if (guns >= 2)
+            {
+                StartCoroutine(FireCD(fireRate));
+                GameObject bullet2 = Instantiate(shotPref, fireTransformUp.position, fireTransformUp.rotation);
+                bullet2.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
+                Destroy(bullet2, 2);
+            }
+            if (guns == 3)
+            {
+                StartCoroutine(FireCD(fireRate));
+                GameObject bullet2 = Instantiate(shotPref, fireTransformDown.position, fireTransformDown.rotation);
+                bullet2.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
+                Destroy(bullet2, 2);
+            }
+
         }
     }
     private void FixedUpdate()
