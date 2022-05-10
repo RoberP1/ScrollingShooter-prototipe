@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1") && canShot)
+        if (Input.GetButton("Fire1") && canShot)
         {
             StartCoroutine(FireCD(fireRate));
             GameObject bullet = Instantiate(shotPref, fireTransformMid.position, fireTransformMid.rotation);
