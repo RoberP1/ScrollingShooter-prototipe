@@ -778,7 +778,7 @@ MonoBehaviour:
   fireTransformMid: {fileID: 18475085}
   fireTransformUp: {fileID: 2074132213}
   fireTransformDown: {fileID: 119206494}
-  fireRate: 7
+  fireRate: 5
   guns: 1
 --- !u!50 &797371006
 Rigidbody2D:

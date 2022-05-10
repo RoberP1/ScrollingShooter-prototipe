@@ -42,7 +42,7 @@ public class Spawner : MonoBehaviour
         canspawn = false;
         yield return new WaitForSeconds(delay);
         canspawn = true;
-        if (this.delay > 2)
+        if (this.delay > 1)
         {
             this.delay -= 0.05f;
         }
