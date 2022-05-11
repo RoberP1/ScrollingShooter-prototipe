@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && canShot)
+        if (Input.GetButton("Fire1") && canShot && Time.timeScale != 0)
         {
             switch (guns)
             {

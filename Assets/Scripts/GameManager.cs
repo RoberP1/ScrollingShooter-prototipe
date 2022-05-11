@@ -59,6 +59,11 @@ public class GameManager : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+    }
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
         SceneManager.LoadScene(0);
     }
     public void EnemyDie()
