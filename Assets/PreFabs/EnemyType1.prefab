@@ -221,3 +221,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explotionAnim: {fileID: 5325043571630439574, guid: cdaecd8eb1f41cb47a0066f3f1043691, type: 3}
+  powerups:
+  - {fileID: 8682372831594833929, guid: b74e9f1b9bb349240b83ed73ddbcc90e, type: 3}
+  - {fileID: 1741562794695460124, guid: 5bc42b9282c87c247b20f18ccf2c71c5, type: 3}

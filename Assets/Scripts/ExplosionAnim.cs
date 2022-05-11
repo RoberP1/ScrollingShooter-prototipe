@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ExplosionAnim : MonoBehaviour
 {
-public void ExplosionDone()
+    [SerializeField] private AudioSource audio;
+    private void Start()
+    {
+        audio.Play();
+    }
+    public void ExplosionDone()
     {
         Destroy(gameObject);
     }

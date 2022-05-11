@@ -7,6 +7,7 @@ public class DestructableEnemy : MonoBehaviour
     bool canBeDestroyed = false;
     GameManager gameManager;
     [SerializeField] private GameObject explotionAnim;
+    [SerializeField] private GameObject[] powerups;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -27,8 +28,16 @@ public class DestructableEnemy : MonoBehaviour
             gameManager.EnemyDie();
             Instantiate(explotionAnim, transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
+            SelectPowerUp();
             Destroy(gameObject);
         }
+    }
+
+    private void SelectPowerUp()
+    {
+        int r = Random.Range(1, 101);
+        if(r <= 4) Instantiate(powerups[0], transform.position, Quaternion.identity);
+        if(r > 4 && r <=10) Instantiate(powerups[1], transform.position, Quaternion.identity);
     }
 
 }

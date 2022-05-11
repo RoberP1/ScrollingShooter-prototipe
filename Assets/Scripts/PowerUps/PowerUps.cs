@@ -9,7 +9,7 @@ public abstract class PowerUps : MonoBehaviour
     public virtual void effect()
     {
         player = FindObjectOfType<Player>();
-        //audio.Play();
+        audio.Play();
     }
     protected void OnTriggerEnter2D(Collider2D collision)
     {

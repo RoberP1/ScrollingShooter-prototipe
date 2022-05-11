@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Text enemyTxt;
     [SerializeField] private AudioSource audio;
     [SerializeField] private AudioSource music;
-    [SerializeField] private AudioClip EnemyClip;
     [SerializeField] private AudioClip finishClip;
 
     public int enemys;
@@ -47,8 +46,6 @@ public class GameManager : MonoBehaviour
     }
     public void EnemyDie()
     {
-       // audio.clip = EnemyClip;
-        //audio.Play();
         enemys++;
         enemyTxt.text = "Score: " + enemys.ToString();
     }

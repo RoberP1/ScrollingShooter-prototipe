@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     GameManager gameManager;
     SpriteRenderer spriteRenderer;
 
-    //[SerializeField] private AudioSource audio;
+    [SerializeField] private AudioSource audio;
     // Player Movement
     [Header("Movement")]
     public float speed;
@@ -49,29 +49,49 @@ public class Player : MonoBehaviour
     {
         if (Input.GetButton("Fire1") && canShot)
         {
+            switch (guns)
+            {
+                case 1:
+                    Firemid();
+                    break;
+                case 2:
+                    FireUp();
+                    FireDown();
+                    break;
+                default:
+                    Firemid();
+                    FireUp();
+                    FireDown();
+                    break;
+            }
             StartCoroutine(FireCD(fireRate));
-            GameObject bullet = Instantiate(shotPref, fireTransformMid.position, fireTransformMid.rotation);
-            bullet.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
-            Destroy(bullet, 2);
-            //audio.clip = fireSound;
-            //audio.Play();
-            if (guns >= 2)
-            {
-                StartCoroutine(FireCD(fireRate));
-                GameObject bullet2 = Instantiate(shotPref, fireTransformUp.position, fireTransformUp.rotation);
-                bullet2.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
-                Destroy(bullet2, 2);
-            }
-            if (guns == 3)
-            {
-                StartCoroutine(FireCD(fireRate));
-                GameObject bullet2 = Instantiate(shotPref, fireTransformDown.position, fireTransformDown.rotation);
-                bullet2.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
-                Destroy(bullet2, 2);
-            }
+            audio.clip = fireSound;
+            audio.Play();
         }
 
     }
+
+    private void FireDown()
+    {
+        GameObject bullet = Instantiate(shotPref, fireTransformDown.position, fireTransformDown.rotation);
+        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
+        Destroy(bullet, 2);
+    }
+
+    private void FireUp()
+    {
+        GameObject bullet = Instantiate(shotPref, fireTransformUp.position, fireTransformUp.rotation);
+        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
+        Destroy(bullet, 2);
+    }
+
+    private void Firemid()
+    {
+        GameObject bullet = Instantiate(shotPref, fireTransformMid.position, fireTransformMid.rotation);
+        bullet.GetComponent<Rigidbody2D>().AddRelativeForce(bullet.transform.right * fireImpulse, ForceMode2D.Impulse);
+        Destroy(bullet, 2);
+    }
+
     private void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
