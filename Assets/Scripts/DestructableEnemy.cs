@@ -5,9 +5,11 @@ using UnityEngine;
 public class DestructableEnemy : MonoBehaviour
 {
     bool canBeDestroyed = false;
+    GameManager gameManager;
+    [SerializeField] private GameObject explotionAnim;
     void Start()
     {
-
+        gameManager = FindObjectOfType<GameManager>();
     }
     void Update()
     {
@@ -22,8 +24,10 @@ public class DestructableEnemy : MonoBehaviour
 
         if (collision.CompareTag("Bullet"))
         {
-            Destroy(gameObject);
+            gameManager.EnemyDie();
+            Instantiate(explotionAnim, transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 
