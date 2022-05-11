@@ -143,7 +143,7 @@ public class Boss : MonoBehaviour
         mechanic3 = true;
         maxattacks = 3;
         StartCoroutine(Mechanic3());
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(9.5f);
         mechanic3 = false;
         maxattacks = 4;
     }   
@@ -161,7 +161,7 @@ public class Boss : MonoBehaviour
     {
         mechanic2 = true;
         StartCoroutine(Mechanic2());
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(4.3f);
         mechanic2 = false;
 
     }

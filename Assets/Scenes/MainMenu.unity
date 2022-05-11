@@ -1660,7 +1660,10 @@ MonoBehaviour:
 
     Move: w,a,s,d / up,left,down,right
 
-    Shot: click / leftCtrl'
+    Shot: click / leftCtrl
+
+    Pause:
+    P'
 --- !u!222 &1939835751
 CanvasRenderer:
   m_ObjectHideFlags: 0

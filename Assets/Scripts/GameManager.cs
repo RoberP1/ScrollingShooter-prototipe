@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject winUI;
     [SerializeField] private GameObject loseUI;
+    [SerializeField] private GameObject pauseUI;
     [SerializeField] private Text enemyTxt;
 
     [Header("Audio")]
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject boss;
     private Spawner spawner;
     private bool bossfight;
+    [SerializeField] private int spawnScore;
     public int score;
     void Start()
     {
@@ -28,18 +30,24 @@ public class GameManager : MonoBehaviour
         enemyTxt.text = "Score: 0";
         winUI.gameObject.SetActive(false);
         loseUI.gameObject.SetActive(false);
+        pauseUI.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (score > 10 && !bossfight)
+        if (score > spawnScore && !bossfight)
         {
             bossfight = true;
             spawner.boss = true;
             Instantiate(boss, spawner.transform.position, Quaternion.identity);
             music.Stop();
             StartCoroutine(MusicBoss(3));
-
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            music.Pause();
+            pauseUI.gameObject.SetActive(true);
+            Time.timeScale = 0;
         }
     }
     public void Lose()
@@ -65,6 +73,12 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SceneManager.LoadScene(0);
+    }
+    public void Resume()
+    {
+        pauseUI.gameObject.SetActive(false);
+        music.UnPause();
+        Time.timeScale = 1;
     }
     public void EnemyDie()
     {
