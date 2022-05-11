@@ -6,36 +6,53 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("UI")]
     [SerializeField] private GameObject winUI;
     [SerializeField] private GameObject loseUI;
     [SerializeField] private Text enemyTxt;
+
+    [Header("Audio")]
     [SerializeField] private AudioSource audio;
     [SerializeField] private AudioSource music;
+    [SerializeField] private AudioSource bossmusic;
     [SerializeField] private AudioClip finishClip;
 
-    public int enemys;
+    [Header("Spawns")]
+    [SerializeField] private GameObject boss;
+    private Spawner spawner;
+    private bool bossfight;
+    public int score;
     void Start()
     {
-        enemyTxt.text = "kills: 0";
+        spawner = FindObjectOfType<Spawner>();
+        enemyTxt.text = "Score: 0";
         winUI.gameObject.SetActive(false);
         loseUI.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        
+        if (score > 10 && !bossfight)
+        {
+            bossfight = true;
+            spawner.boss = true;
+            Instantiate(boss, spawner.transform.position, Quaternion.identity);
+            music.Stop();
+            StartCoroutine(MusicBoss(3));
+
+        }
     }
     public void Lose()
     {
-      //  music.Pause();
+        music.Pause();
         loseUI.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
     public void Win()
     {
-       // music.Pause();
-       // audio.clip = finishClip;
-       // audio.Play();
+        bossmusic.Pause();
+        audio.clip = finishClip;
+        audio.Play();
         winUI.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
@@ -46,7 +63,12 @@ public class GameManager : MonoBehaviour
     }
     public void EnemyDie()
     {
-        enemys++;
-        enemyTxt.text = "Score: " + enemys.ToString();
+        score++;
+        enemyTxt.text = "Score: " + score.ToString();
+    }
+    public IEnumerator MusicBoss(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        bossmusic.Play();
     }
 }

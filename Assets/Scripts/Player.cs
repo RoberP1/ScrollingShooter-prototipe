@@ -44,7 +44,6 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetButton("Fire1") && canShot)
@@ -135,6 +134,8 @@ public class Player : MonoBehaviour
             gameManager.Lose();
         }
         StartCoroutine(DamageCD(4));
+        audio.clip = healthSound;
+        audio.Play();
     }
     public IEnumerator DamageCD(float delay)
     {

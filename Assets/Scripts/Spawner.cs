@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject SpawnPref5;
     public float delay;
     private bool canspawn;
+    public bool boss;
     
     void Start()
     {
@@ -21,7 +22,7 @@ public class Spawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (canspawn)
+        if (canspawn && !boss)
         {
             Spawn();
             StartCoroutine(SpawnCD(delay));
